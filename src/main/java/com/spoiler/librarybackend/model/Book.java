@@ -5,9 +5,14 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
+
 @Component
 @Document(collection = "Book")
 public class Book {
+
+    @Id
+    BigInteger id;
 
     String title;
     String author;
@@ -22,6 +27,14 @@ public class Book {
         this.author = author;
         this.price = price;
         this.count = count;
+    }
+
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
     public String getTitle() {
