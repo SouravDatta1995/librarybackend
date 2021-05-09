@@ -1,13 +1,14 @@
-package com.spoiler.librarybackend.models;
+package com.spoiler.librarybackend.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
+
 @Component
-@Document(collation = "Book")
+@Document(collection = "Book")
 public class Book {
-    @Id
-    String id;
+
     String title;
     String author;
     double price;
@@ -16,20 +17,11 @@ public class Book {
     public Book() {
     }
 
-    public Book(String id, String title, String author, double price, int count) {
-        this.id = id;
+    public Book(String title, String author, double price, int count) {
         this.title = title;
         this.author = author;
         this.price = price;
         this.count = count;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
