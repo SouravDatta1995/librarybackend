@@ -1,6 +1,5 @@
 package com.spoiler.librarybackend.controllers;
 
-
 import com.spoiler.librarybackend.model.Book;
 import com.spoiler.librarybackend.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,12 @@ public class BookController {
     BookRepository bookRepository;
 
     @GetMapping("/")
-    public List<Book> showBooks() {
+    private List<Book> showBooks() {
         return bookRepository.findAll();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addBook(@RequestBody Book book){
+    private ResponseEntity<String> addBook(@RequestBody Book book){
         if(bookRepository.findBookByAuthorAndTitle(book.getAuthor(),book.getTitle()).isPresent()) {
             return ResponseEntity.of(Optional.of("Book already added"));
         }
@@ -32,9 +31,11 @@ public class BookController {
         }
     }
     @PostMapping("/find")
-    public List<Book> findBooks(@RequestBody Book book){
+    private List<Book> findBooks(@RequestBody Book book){
         String author = book.getAuthor()==null?"":book.getAuthor();
         String title = book.getTitle()==null?"":book.getTitle();
         return bookRepository.findBooksByAuthorContainingAndTitleContaining(author,title);
     }
+
+
 }
